@@ -128,6 +128,15 @@
 </ul>
 <p>각 권한은 기기 설정에서 언제든지 거부·변경할 수 있으며, 거부 시 해당 기능만 제한됩니다. 그 밖의 권한은 요청하지 않으며, 특히 <b>인터넷 권한이 없어</b> 데이터를 외부로 보내는 것이 기술적으로 불가능합니다.</p>
 
+<h2><span class="num">07-1</span>음성 입력</h2>
+<p>입력칸 옆 마이크를 누르면 현장명·장소명·작업내용을 말로 넣을 수 있습니다.</p>
+<ul>
+  <li>본 앱은 <b>마이크 권한을 요청하지 않으며 음성을 직접 녹음하지 않습니다.</b></li>
+  <li>기기에 설치된 <b>음성인식 기능(구글 등)</b>을 불러 쓰며, 앱은 그 결과로 돌아온 <b>글자만</b> 받습니다.</li>
+  <li>음성이 어떻게 처리되는지는 해당 음성인식 앱의 방침을 따릅니다. 기기·설정에 따라 그 앱이 자체적으로 인터넷을 사용할 수 있습니다.</li>
+  <li>마이크 버튼을 누르지 않으면 이 기능은 전혀 동작하지 않으며, 자판 입력만으로도 모든 기능을 쓸 수 있습니다.</li>
+</ul>
+
 <h2><span class="num">08</span>위치정보 처리</h2>
 <p>본 앱은 <b>위치 권한을 요청하지 않으며 위치정보를 수집·이용·저장하지 않습니다.</b> 사진에 GPS 좌표를 기록하는 기능도 제공하지 않습니다.</p>
 
@@ -207,6 +216,15 @@
   <li><b>Storage</b> (<code>WRITE_EXTERNAL_STORAGE</code>, Android 9 and below) — to save photos to the gallery. Not required on Android 10 or later.</li>
 </ul>
 <p>You may deny or revoke these at any time in system settings; only the related feature is affected. No other permission is requested — in particular the app has <b>no Internet permission</b>, so transmitting data off the device is technically impossible.</p>
+
+<h2><span class="num">07-1</span>Voice Input</h2>
+<p>Tapping the microphone next to a text field lets you dictate a site name, place name or work description.</p>
+<ul>
+  <li>The app <b>does not request microphone permission and never records audio itself.</b></li>
+  <li>It hands the task to the <b>speech recognition service installed on your device</b> (e.g. Google) and receives only the <b>resulting text</b>.</li>
+  <li>How the audio is processed is governed by that speech recognition app's own policy. Depending on your device and settings, that app may use the Internet on its own.</li>
+  <li>Nothing happens unless you tap the microphone, and every feature remains fully usable with typing alone.</li>
+</ul>
 
 <h2><span class="num">08</span>Location Data</h2>
 <p>The app <b>does not request location permission and does not collect, use or store location data.</b> It does not write GPS coordinates into photos.</p>
