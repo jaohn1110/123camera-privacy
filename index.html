@@ -92,12 +92,13 @@
 </ul>
 
 <h2><span class="num">02</span>수집하는 개인정보 항목</h2>
-<p>본 앱은 이름, 생년월일, 전화번호, 이메일, 위치정보, 광고식별자 등 <b>개인을 식별할 수 있는 정보를 일절 수집하지 않습니다.</b> 회원가입 절차가 없습니다.</p>
+<p>본 앱은 이름, 생년월일, 전화번호, 이메일, 광고식별자 등 <b>개인을 식별할 수 있는 정보를 일절 수집하지 않습니다.</b> 회원가입 절차가 없습니다.</p>
 <p>기기 안에 저장되는 항목은 다음과 같습니다.</p>
 <table>
   <tr><th>항목</th><th>내용</th><th>저장 위치</th></tr>
   <tr><td>사진 (필수)</td><td>이용자가 촬영하거나 갤러리에서 선택한 사진</td><td>갤러리 <code>DCIM/123Camera</code></td></tr>
-  <tr><td>현장 기록</td><td>현장명·장소명·작업내용, 사진의 저장 위치값</td><td>앱 내부 저장소</td></tr>
+  <tr><td>현장 기록</td><td>현장명·장소명·작업내용·메모, 사진의 저장 위치값</td><td>앱 내부 저장소</td></tr>
+  <tr><td>촬영 지점 주소 (선택)</td><td>장소의 1번 사진을 찍은 곳의 주소 한 줄. 위치 권한을 허용한 경우에만 저장되며 좌표는 저장하지 않습니다. 자세한 내용은 08항 참고</td><td>앱 내부 저장소</td></tr>
   <tr><td>설정</td><td>테마, 언어, 보고서 기본값, 사진합치기 설정</td><td>앱 내부 저장소</td></tr>
 </table>
 
@@ -125,6 +126,7 @@
 <ul>
   <li><b>카메라</b> (<code>CAMERA</code>) — 작업 전/중/후 사진 촬영</li>
   <li><b>저장공간</b> (<code>WRITE_EXTERNAL_STORAGE</code>, 안드로이드 9 이하) — 촬영한 사진을 갤러리에 저장. 안드로이드 10 이상에서는 이 권한 없이 동작합니다.</li>
+  <li><b>위치</b> (<code>ACCESS_FINE_LOCATION</code> / <code>ACCESS_COARSE_LOCATION</code>, 선택) — 장소의 1번 사진을 찍을 때 그 지점의 주소를 기록하기 위해서만 사용합니다. 거부해도 모든 기능이 정상 동작합니다. 자세한 내용은 08항 참고.</li>
 </ul>
 <p>각 권한은 기기 설정에서 언제든지 거부·변경할 수 있으며, 거부 시 해당 기능만 제한됩니다. 그 밖의 권한은 요청하지 않으며, 특히 <b>인터넷 권한이 없어</b> 데이터를 외부로 보내는 것이 기술적으로 불가능합니다.</p>
 
@@ -138,7 +140,14 @@
 </ul>
 
 <h2><span class="num">08</span>위치정보 처리</h2>
-<p>본 앱은 <b>위치 권한을 요청하지 않으며 위치정보를 수집·이용·저장하지 않습니다.</b> 사진에 GPS 좌표를 기록하는 기능도 제공하지 않습니다.</p>
+<p>본 앱은 <b>장소의 1번(작업 전) 사진을 촬영할 때에 한해</b> 위치 권한을 사용합니다. 2번·3번 사진은 위치를 확인하지 않습니다.</p>
+<ul>
+  <li><b>쓰는 목적</b> — 촬영 지점의 <b>주소 한 줄</b>을 현장 기록에 적어 두어, 나중에 어디였는지 찾을 수 있게 하는 것뿐입니다.</li>
+  <li><b>저장되는 것</b> — 주소 글자만 기기 안 현장 기록에 저장됩니다. <b>위도·경도 좌표는 저장하지 않습니다.</b></li>
+  <li><b>사진에는 남지 않습니다</b> — 사진 파일(EXIF)에 좌표를 기록하지 않으므로, 사진을 메신저 등으로 보내도 촬영 위치가 함께 전달되지 않습니다.</li>
+  <li><b>주소로 바꾸는 과정</b> — 좌표를 주소 글자로 바꾸는 일은 안드로이드 운영체제의 기능에 맡깁니다. 본 앱은 인터넷 권한이 없어 직접 통신하지 않으며, 이 과정에서 위치가 본 앱의 서버로 전송되는 일은 없습니다(본 앱은 서버를 운영하지 않습니다). 기기가 인터넷에 연결돼 있지 않으면 주소가 만들어지지 않고 빈 값으로 남습니다.</li>
+  <li><b>거부해도 됩니다</b> — 위치 권한을 거부해도 촬영·기록·보고서 등 모든 기능이 그대로 동작하며, 주소만 비어 있게 됩니다. 저장된 주소는 현장 수정에서 지우거나 현장을 삭제하면 함께 사라집니다.</li>
+</ul>
 
 <h2><span class="num">09</span>정보주체의 권리·의무 및 행사 방법</h2>
 <p>이용자는 개인정보 열람, 정정, 삭제, 처리정지를 요구할 권리가 있습니다. 본 앱은 데이터를 외부 서버에 저장하지 않으므로, 이 권리는 기기 내 데이터에 대해 이용자가 앱 안에서 직접 즉시 행사할 수 있습니다. 추가 문의는 아래 보호책임자 연락처로 가능합니다.</p>
@@ -187,11 +196,12 @@
 </ul>
 
 <h2><span class="num">02</span>Information Collected</h2>
-<p>We collect <b>no personally identifiable information</b> — no name, date of birth, phone number, email address, location or advertising ID. There is no account or sign-up.</p>
+<p>We collect <b>no personally identifiable information</b> — no name, date of birth, phone number, email address or advertising ID. There is no account or sign-up.</p>
 <table>
   <tr><th>Item</th><th>Contents</th><th>Where stored</th></tr>
   <tr><td>Photos (required)</td><td>Taken by you or picked from your gallery</td><td>Gallery <code>DCIM/123Camera</code></td></tr>
-  <tr><td>Site records</td><td>Site name, place name, work description, photo references</td><td>App private storage</td></tr>
+  <tr><td>Site records</td><td>Site name, place name, work description, memo, photo references</td><td>App private storage</td></tr>
+  <tr><td>Capture address (optional)</td><td>One line of street address for the spot where photo 1 of a place was taken. Stored only if you allow location permission; coordinates are not stored. See section 08</td><td>App private storage</td></tr>
   <tr><td>Settings</td><td>Theme, language, report defaults, merge options</td><td>App private storage</td></tr>
 </table>
 
@@ -214,6 +224,7 @@
 <ul>
   <li><b>Camera</b> (<code>CAMERA</code>) — to take before/during/after photos.</li>
   <li><b>Storage</b> (<code>WRITE_EXTERNAL_STORAGE</code>, Android 9 and below) — to save photos to the gallery. Not required on Android 10 or later.</li>
+  <li><b>Location</b> (<code>ACCESS_FINE_LOCATION</code> / <code>ACCESS_COARSE_LOCATION</code>, optional) — used solely to record the street address of the spot where photo 1 of a place is taken. Denying it leaves every feature working. See section 08.</li>
 </ul>
 <p>You may deny or revoke these at any time in system settings; only the related feature is affected. No other permission is requested — in particular the app has <b>no Internet permission</b>, so transmitting data off the device is technically impossible.</p>
 
@@ -227,7 +238,14 @@
 </ul>
 
 <h2><span class="num">08</span>Location Data</h2>
-<p>The app <b>does not request location permission and does not collect, use or store location data.</b> It does not write GPS coordinates into photos.</p>
+<p>The app uses location permission <b>only when you take photo 1 (the "before" shot) of a place.</b> Photos 2 and 3 never read your location.</p>
+<ul>
+  <li><b>Purpose</b> — to record a <b>single line of street address</b> in the site record, so you can tell later where the work was done.</li>
+  <li><b>What is stored</b> — the address text only, in the site record on your device. <b>Latitude and longitude are not stored.</b></li>
+  <li><b>Not written into photos</b> — no GPS coordinates are written into the photo files (EXIF), so sending a photo to someone does not reveal where it was taken.</li>
+  <li><b>How the address is produced</b> — converting coordinates into an address is handled by the Android operating system. This app holds no Internet permission and performs no network calls of its own; your location is never sent to a server operated by us (we operate none). If the device has no Internet connection, the address is simply left empty.</li>
+  <li><b>You may decline</b> — if you deny location permission, every feature (capture, records, reports) continues to work exactly as before; only the address stays empty. A stored address is removed when you clear it in Edit Site or delete the site.</li>
+</ul>
 
 <h2><span class="num">09</span>Your Rights</h2>
 <p>You have the right to access, correct, delete and restrict processing of your data. Because nothing is stored on a server, you can exercise these rights immediately and directly within the app. For further enquiries, contact the officer listed below.</p>
